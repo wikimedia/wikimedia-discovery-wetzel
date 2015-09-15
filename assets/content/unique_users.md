@@ -1,7 +1,7 @@
 Users of Maps Features
 =======
 
-This dashboard contains a count of the unique users of various Maps platforms, including:
+This tab contains a count of the unique users of various Maps platforms, including:
 
 * [GeoHack](https://www.mediawiki.org/wiki/Toolserver:GeoHack)
 * [WikiMiniAtlas](https://meta.wikimedia.org/wiki/WikiMiniAtlas)
@@ -9,7 +9,7 @@ This dashboard contains a count of the unique users of various Maps platforms, i
 * The maps on Wikivoyage ([example](https://tools.wmflabs.org/wikivoyage/w/poimap2.php?lat=49.513611&lon=-115.768611&zoom=12&layer=M&lang=en&name=Cranbrook))
 
 The counts are sampled at a rate of *1%* so they're not entirely accurate, but they are useful for gauging the difference in activity
-with each platform.
+between each platform.
 
 Outages and inaccuracies
 ------

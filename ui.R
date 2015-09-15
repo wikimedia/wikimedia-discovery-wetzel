@@ -25,13 +25,17 @@ body <- dashboardBody(
             dygraphOutput("users_per_platform"),
             includeMarkdown("./assets/content/unique_users.md")),
     tabItem(tabName = "geohack",
-            dygraphOutput("geohack_feature_usage")),
+            dygraphOutput("geohack_feature_usage"),
+            includeMarkdown("./assets/content/geohack_usage.md")),
     tabItem(tabName = "wikiminiatlas",
-            dygraphOutput("wikiminiatlas_feature_usage")),
+            dygraphOutput("wikiminiatlas_feature_usage"),
+            includeMarkdown("./assets/content/wikiminiatlas_usage.md")),
     tabItem(tabName = "wikivoyage",
-            dygraphOutput("wikivoyage_feature_usage")),
+            dygraphOutput("wikivoyage_feature_usage"),
+            includeMarkdown("./assets/content/wikivoyage_usage.md")),
     tabItem(tabName = "wiwosm",
-            dygraphOutput("wiwosm_feature_usage"))
+            dygraphOutput("wiwosm_feature_usage"),
+            includeMarkdown("./assets/content/wiwosm_usage.md"))
   )
 )
 
