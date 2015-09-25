@@ -39,4 +39,5 @@ body <- dashboardBody(
   )
 )
 
-dashboardPage(header, sidebar, body, skin = "green")
+dashboardPage(header, sidebar, body, skin = "green",
+              title = "Maps Usage Dashboard | Discovery | Engineering | Wikimedia Foundation")
