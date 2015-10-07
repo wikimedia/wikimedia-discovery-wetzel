@@ -1,8 +1,8 @@
 # Dependencies
+library(plyr)
 library(magrittr)
 library(reshape2)
 library(polloi)
-library(plyr)
 
 # Read in action data and write it into the global scope with sufficient formatting to be trivially
 # used in dygraphs.
