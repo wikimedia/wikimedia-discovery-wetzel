@@ -58,7 +58,7 @@ shinyServer(function(input, output) {
            Tiles = { temp %<>% dplyr::select(-`total users`) })
     temp %<>% polloi::smoother(smooth_level = polloi::smooth_switch(input$smoothing_global,
       input$smoothing_tiles_summary_series))
-    polloi::make_dygraph(temp, "Date", "Tiles", "Tile usage") %>%
+    polloi::make_dygraph(temp, "Date", input$tiles_summary_variable, "Tile usage") %>%
       dySeries(name = grep('average tiles per user', names(temp), value = TRUE), axis = 'y2') %>%
       dyAxis(name = 'y', drawGrid = FALSE) %>%
       dyAxis(name = 'y2', independentTicks = TRUE, drawGrid = FALSE) %>%
