@@ -7,7 +7,8 @@ header <- dashboardHeader(title = "Wikimedia Maps", disable = FALSE)
 
 sidebar <- dashboardSidebar(
   tags$head(
-    tags$link(rel = "stylesheet", type = "text/css", href = "stylesheet.css")
+    tags$link(rel = "stylesheet", type = "text/css", href = "stylesheet.css"),
+    tags$script(src = "custom.js")
   ),
   sidebarMenu(
     menuItem(text = "Tiles",
