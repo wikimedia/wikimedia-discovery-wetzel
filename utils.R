@@ -8,16 +8,18 @@ library(polloi)
 # used in dygraphs.
 read_actions <- function() {
   # Read in data, split and rename it, and write it o
-  data <- polloi::read_dataset("maps/actions_per_tool.tsv")
-  data <- split(data[,c(1,3,4)], data$feature)
-  usage_data <<- lapply(data, reshape2::dcast, formula = timestamp ~ variable, fun.aggregate = sum)
+  data <- polloi::read_dataset("maps/actions_per_tool.tsv") %>%
+    dplyr::rename(date = timestamp)
+  data <- split(data[, c(1, 3, 4)], data$feature)
+  usage_data <<- lapply(data, reshape2::dcast, formula = date ~ variable, fun.aggregate = sum)
   return(invisible())
 }
 
 # Read in user count
 read_users <- function() {
-  data <- polloi::read_dataset("maps/users_per_feature.tsv")
-  interim <- reshape2::dcast(data, formula = timestamp ~ variable, fun.aggregate = sum)
+  data <- polloi::read_dataset("maps/users_per_feature.tsv") %>%
+    dplyr::rename(date = timestamp)
+  interim <- reshape2::dcast(data, formula = date ~ variable, fun.aggregate = sum)
   interim[is.na(interim)] <- 0
   user_data <<- interim
   return(invisible())
