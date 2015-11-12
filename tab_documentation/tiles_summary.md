@@ -1,12 +1,13 @@
 Tiles (Summary)
 =======
 
-There was a huge inflow of users when the project was announced, but then dropped to pre-announcement levels a week after the announcement.
+The initial usage spike was due to the announcement of the mapping service to the development community, and not the regular usage by Wikipedia users. Once the initial interest subsided, the usage fell back to the expected pre-announcement levels.
 
 Outages and inaccuracies
 ------
 
-* None so far!
+* From 2015-11-01 to 2015-11-10 stress-testing traffic made its way into this data; this has now been removed.
+
 
 Questions, bug reports, and feature suggestions
 ------
