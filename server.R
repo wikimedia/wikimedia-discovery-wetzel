@@ -110,4 +110,17 @@ shinyServer(function(input, output) {
       polloi::make_dygraph("Date", "Events", "Feature usage for WIWOSM")
   })
   
+  # Check datasets for missing data and notify user which datasets are missing data (if any)
+  output$message_menu <- renderMenu({
+    notifications <- list(
+      polloi::check_yesterday(usage_data[[1]], "action data"),
+      polloi::check_past_week(usage_data[[1]], "action data"),
+      polloi::check_yesterday(user_data, "user counts"),
+      polloi::check_past_week(user_data, "user counts"),
+      polloi::check_yesterday(tiles_data, "tile usage data"),
+      polloi::check_past_week(tiles_data, "tile usage data"))
+    notifications <- notifications[!sapply(notifications, is.null)]
+    return(dropdownMenu(type = "notifications", .list = notifications, badgeStatus = "warning"))
+  })
+  
 })

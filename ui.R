@@ -2,7 +2,7 @@ library(shiny)
 library(shinydashboard)
 library(dygraphs)
 
-header <- dashboardHeader(title = "Wikimedia Maps", disable = FALSE)
+header <- dashboardHeader(title = "Wikimedia Maps", dropdownMenuOutput("message_menu"), disable = FALSE)
 
 sidebar <- dashboardSidebar(
   tags$head(
