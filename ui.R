@@ -4,6 +4,10 @@ library(dygraphs)
 
 header <- dashboardHeader(title = "Wikimedia Maps", dropdownMenuOutput("message_menu"), disable = FALSE)
 
+spider_check <- function(id_name){
+  shiny::checkboxInput(id_name, label = "Include automata", value = TRUE)
+}
+
 sidebar <- dashboardSidebar(
   tags$head(
     tags$link(rel = "stylesheet", type = "text/css", href = "stylesheet.css"),
@@ -42,6 +46,7 @@ body <- dashboardBody(
               column(polloi::smooth_select("smoothing_tiles_summary_series"), width = 3),
               column(polloi::timeframe_select("tiles_summary_series_timeframe"), width = 3),
               column(polloi::timeframe_daterange("tiles_summary_series_timeframe"), width = 4)),
+            spider_check("tile_summary_automata_check"),
             dygraphOutput("tiles_summary_series"),
             div(id = "tiles_summary_series_legend", style = "text-align: right;"),
             includeMarkdown("./tab_documentation/tiles_summary.md")),
@@ -50,6 +55,7 @@ body <- dashboardBody(
               column(polloi::smooth_select("smoothing_tiles_style_series"), width = 4),
               column(polloi::timeframe_select("tiles_style_series_timeframe"), width = 4),
               column(polloi::timeframe_daterange("tiles_style_series_timeframe"), width = 4)),
+            spider_check("tile_style_automata_check"),
             dygraphOutput("tiles_style_series"),
             div(id = "tiles_style_series_legend", style = "text-align: right;"),
             includeMarkdown("./tab_documentation/tiles_total_by_style.md")),
@@ -58,6 +64,7 @@ body <- dashboardBody(
               column(polloi::smooth_select("smoothing_tiles_users_series"), width = 4),
               column(polloi::timeframe_select("tiles_users_series_timeframe"), width = 4),
               column(polloi::timeframe_daterange("tiles_users_series_timeframe"), width = 4)),
+            spider_check("tile_users_automata_check"),
             dygraphOutput("tiles_users_series"),
             div(id = "tiles_users_series_legend", style = "text-align: right;"),
             includeMarkdown("./tab_documentation/tiles_users_by_style.md")),
@@ -68,6 +75,7 @@ body <- dashboardBody(
               column(polloi::timeframe_daterange("tiles_zoom_series_timeframe"), width = 4)),
             fluidRow(column(uiOutput("zoom_level_selector_container"), width = 3),
                      column(dygraphOutput("tiles_zoom_series"), width = 8)),
+            spider_check("tile_zoom_automata_check"),
             div(id = "tiles_zoom_series_legend", style = "text-align: right;"),
             includeMarkdown("./tab_documentation/tiles_total_by_zoom.md")),
     tabItem(tabName = "platform_usage",

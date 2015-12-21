@@ -18,7 +18,7 @@ shinyServer(function(input, output) {
   }
   
   output$tiles_summary_series <- renderDygraph({
-    temp <- ddply(tiles_data, .(date), summarize,
+    temp <- ddply(data_select(input$tile_summary_automata_check, new_tiles_automata, new_tiles_no_automata), .(date), summarize,
           `total tiles` = sum(total),
           `total users` = sum(users),
           `average tiles per user` = `total tiles` / `total users`)
@@ -36,8 +36,10 @@ shinyServer(function(input, output) {
                    tooltip = "Maps launch announcement",
                    width = 100, height = 25, attachAtBottom = TRUE)
   })
+  
   output$tiles_style_series <- renderDygraph({
-    ddply(tiles_data, .(date, style), summarize, `total tiles` = sum(total)) %>%
+    ddply(data_select(input$tile_style_automata_check, new_tiles_automata, new_tiles_no_automata),
+          .(date, style), summarize, `total tiles` = sum(total)) %>%
       tidyr::spread(style, `total tiles`) %>%
       polloi::smoother(smooth_level = polloi::smooth_switch(input$smoothing_global, input$smoothing_tiles_style_series)) %>%
       polloi::subset_by_date_range(time_frame_range(input$tiles_style_series_timeframe, input$tiles_style_series_timeframe_daterange)) %>%
@@ -47,8 +49,10 @@ shinyServer(function(input, output) {
                    tooltip = "Maps launch announcement",
                    width = 100, height = 25, attachAtBottom = TRUE)
   })
+  
   output$tiles_users_series <- renderDygraph({
-    ddply(tiles_data, .(date, style), summarize, `total users` = sum(users)) %>%
+    ddply(data_select(input$tile_users_automata_check, new_tiles_automata, new_tiles_no_automata),
+          .(date, style), summarize, `total users` = sum(users)) %>%
       tidyr::spread(style, `total users`) %>%
       polloi::smoother(smooth_level = polloi::smooth_switch(input$smoothing_global, input$smoothing_tiles_users_series)) %>%
       polloi::subset_by_date_range(time_frame_range(input$tiles_users_series_timeframe, input$tiles_users_series_timeframe_daterange)) %>%
@@ -58,13 +62,15 @@ shinyServer(function(input, output) {
                    tooltip = "Maps launch announcement",
                    width = 100, height = 25, attachAtBottom = TRUE)
   })
+  
   output$zoom_level_selector_container <- renderUI({
     selectInput("zoom_level_selector", "Zoom level",
                 multiple = TRUE, selected = "0", selectize = FALSE, size = 19,
-                choices = as.character(sort(unique(tiles_data$zoom))))
+                choices = as.character(sort(unique(new_tiles_no_automata$zoom))))
   })
+  
   output$tiles_zoom_series <- renderDygraph({
-    tiles_data %>%
+    data_select(input$tile_zoom_automata_check, new_tiles_automata, new_tiles_no_automata) %>%
       subset(zoom %in% as.numeric(input$zoom_level_selector)) %>%
       ddply(.(date, zoom), summarize, `total tiles` = sum(total)) %>%
       tidyr::spread(zoom, `total tiles`) %>%
@@ -117,8 +123,8 @@ shinyServer(function(input, output) {
       polloi::check_past_week(usage_data[[1]], "action data"),
       polloi::check_yesterday(user_data, "user counts"),
       polloi::check_past_week(user_data, "user counts"),
-      polloi::check_yesterday(tiles_data, "tile usage data"),
-      polloi::check_past_week(tiles_data, "tile usage data"))
+      polloi::check_yesterday(new_tiles_automata, "tile usage data"),
+      polloi::check_past_week(new_tiles_automata, "tile usage data"))
     notifications <- notifications[!sapply(notifications, is.null)]
     return(dropdownMenu(type = "notifications", .list = notifications, badgeStatus = "warning"))
   })
