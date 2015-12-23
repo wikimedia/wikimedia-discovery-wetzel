@@ -18,7 +18,8 @@ shinyServer(function(input, output) {
   }
   
   output$tiles_summary_series <- renderDygraph({
-    temp <- ddply(data_select(input$tile_summary_automata_check, new_tiles_automata, new_tiles_no_automata), .(date), summarize,
+    temp <- polloi::data_select(input$tile_summary_automata_check, new_tiles_automata, new_tiles_no_automata) %>%
+    ddply(.(date), summarize,
           `total tiles` = sum(total),
           `total users` = sum(users),
           `average tiles per user` = `total tiles` / `total users`)
@@ -38,8 +39,8 @@ shinyServer(function(input, output) {
   })
   
   output$tiles_style_series <- renderDygraph({
-    ddply(data_select(input$tile_style_automata_check, new_tiles_automata, new_tiles_no_automata),
-          .(date, style), summarize, `total tiles` = sum(total)) %>%
+    polloi::data_select(input$tile_style_automata_check, new_tiles_automata, new_tiles_no_automata) %>%
+    ddply(.(date, style), summarize, `total tiles` = sum(total)) %>%
       tidyr::spread(style, `total tiles`) %>%
       polloi::smoother(smooth_level = polloi::smooth_switch(input$smoothing_global, input$smoothing_tiles_style_series)) %>%
       polloi::subset_by_date_range(time_frame_range(input$tiles_style_series_timeframe, input$tiles_style_series_timeframe_daterange)) %>%
@@ -51,8 +52,8 @@ shinyServer(function(input, output) {
   })
   
   output$tiles_users_series <- renderDygraph({
-    ddply(data_select(input$tile_users_automata_check, new_tiles_automata, new_tiles_no_automata),
-          .(date, style), summarize, `total users` = sum(users)) %>%
+    polloi::data_select(input$tile_users_automata_check, new_tiles_automata, new_tiles_no_automata) %>%
+      ddply(.(date, style), summarize, `total users` = sum(users)) %>%
       tidyr::spread(style, `total users`) %>%
       polloi::smoother(smooth_level = polloi::smooth_switch(input$smoothing_global, input$smoothing_tiles_users_series)) %>%
       polloi::subset_by_date_range(time_frame_range(input$tiles_users_series_timeframe, input$tiles_users_series_timeframe_daterange)) %>%
@@ -70,7 +71,7 @@ shinyServer(function(input, output) {
   })
   
   output$tiles_zoom_series <- renderDygraph({
-    data_select(input$tile_zoom_automata_check, new_tiles_automata, new_tiles_no_automata) %>%
+    polloi::data_select(input$tile_zoom_automata_check, new_tiles_automata, new_tiles_no_automata) %>%
       subset(zoom %in% as.numeric(input$zoom_level_selector)) %>%
       ddply(.(date, zoom), summarize, `total tiles` = sum(total)) %>%
       tidyr::spread(zoom, `total tiles`) %>%

@@ -33,10 +33,3 @@ read_tiles <- function() {
                                                                         
   return(invisible())
 }
-
-data_select <- function(condition, true_set, false_set){
-  if(condition){
-    return(true_set)
-  }
-  return(false_set)
-}
