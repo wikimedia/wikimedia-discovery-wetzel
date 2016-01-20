@@ -33,9 +33,15 @@ shinyServer(function(input, output) {
       dyAxis(name = 'y', drawGrid = FALSE) %>%
       dyAxis(name = 'y2', independentTicks = TRUE, drawGrid = FALSE) %>%
       dyLegend(labelsDiv = "tiles_summary_series_legend", show = "always") %>%
-      dyAnnotation(as.Date("2015-09-17"), text = "Announcement",
+      dyAnnotation(as.Date("2015-09-17"), text = "A",
                    tooltip = "Maps launch announcement",
-                   width = 100, height = 25, attachAtBottom = TRUE)
+                   width = 10, height = 20, attachAtBottom = FALSE, series = "total users") %>%
+      dyAnnotation(as.Date("2016-01-08"), text = "B",
+                   tooltip = "Maps launched on en.wikipedia.org",
+                   width = 10, height = 20, attachAtBottom = FALSE, series = "total users") %>%
+      dyAnnotation(as.Date("2016-01-12"), text = "C",
+                   tooltip = "Maps launch on en.wikipedia.org reverted on the 9th; caches begin to clear",
+                   width = 10, height = 20, attachAtBottom = FALSE, series = "total users")
   })
   
   output$tiles_style_series <- renderDygraph({
