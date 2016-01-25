@@ -35,13 +35,13 @@ shinyServer(function(input, output) {
       dyLegend(labelsDiv = "tiles_summary_series_legend", show = "always") %>%
       dyAnnotation(as.Date("2015-09-17"), text = "A",
                    tooltip = "Maps launch announcement",
-                   width = 10, height = 20, attachAtBottom = FALSE, series = "total users") %>%
+                   width = 10, height = 20, attachAtBottom = FALSE, series = grep('total', names(temp), value = TRUE)) %>%
       dyAnnotation(as.Date("2016-01-08"), text = "B",
                    tooltip = "Maps launched on en.wikipedia.org",
-                   width = 10, height = 20, attachAtBottom = FALSE, series = "total users") %>%
+                   width = 10, height = 20, attachAtBottom = FALSE, series = grep('total', names(temp), value = TRUE)) %>%
       dyAnnotation(as.Date("2016-01-12"), text = "C",
                    tooltip = "Maps launch on en.wikipedia.org reverted on the 9th; caches begin to clear",
-                   width = 10, height = 20, attachAtBottom = FALSE, series = "total users")
+                   width = 10, height = 20, attachAtBottom = FALSE, series = grep('total', names(temp), value = TRUE))
   })
   
   output$tiles_style_series <- renderDygraph({
