@@ -1,10 +1,12 @@
 # Dependencies
 library(plyr)
-library(dplyr)
 library(magrittr)
+library(dplyr)
+library(tidyr)
 library(reshape2)
 library(polloi)
 library(data.table)
+library(shinyURL) # devtools::install_github("aoles/shinyURL")
 
 # Read in action data and write it into the global scope with sufficient formatting to be trivially
 # used in dygraphs.

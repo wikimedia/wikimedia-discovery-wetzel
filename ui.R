@@ -1,6 +1,7 @@
 library(shiny)
 library(shinydashboard)
 library(dygraphs)
+library(shinyURL)
 
 header <- dashboardHeader(title = "Wikimedia Maps", dropdownMenuOutput("message_menu"), disable = FALSE)
 
@@ -30,7 +31,11 @@ sidebar <- dashboardSidebar(
              conditionalPanel("input.timeframe_global == 'custom'",
                               dateRangeInput("daterange_global", label = "Custom Date Range",
                                              start = Sys.Date()-11, end = Sys.Date()-1, min = "2015-04-14")),
-             icon = icon("cog", lib = "glyphicon"))
+             icon = icon("cog", lib = "glyphicon")),
+    menuItem(text = "Sharing Options",
+             shinyURL.ui(tinyURL = FALSE),
+             p("Dashboard settings stored in URL.", style = "padding-bottom: 10px;"),
+             icon = icon("share-alt", lib = "glyphicon"))
   )
 )
 

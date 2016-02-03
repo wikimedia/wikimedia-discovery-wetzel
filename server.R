@@ -3,7 +3,7 @@ source("utils.R")
 existing_date <- Sys.Date() - 1
 
 # Actual server code.
-shinyServer(function(input, output) {
+shinyServer(function(input, output, session) {
   
   if(Sys.Date() != existing_date){
     read_actions()
@@ -11,6 +11,8 @@ shinyServer(function(input, output) {
     suppressWarnings(read_tiles())
     existing_date <<- Sys.Date()
   }
+  
+  shinyURL.server(session)
   
   # Wrap time_frame_range to provide global settings
   time_frame_range <- function(input_local_timeframe, input_local_daterange) {
@@ -47,7 +49,7 @@ shinyServer(function(input, output) {
   output$tiles_style_series <- renderDygraph({
     polloi::data_select(input$tile_style_automata_check, new_tiles_automata, new_tiles_no_automata) %>%
     ddply(.(date, style), summarize, `total tiles` = sum(total)) %>%
-      tidyr::spread(style, `total tiles`) %>%
+      tidyr::spread(style, `total tiles`, fill = 0) %>%
       polloi::smoother(smooth_level = polloi::smooth_switch(input$smoothing_global, input$smoothing_tiles_style_series)) %>%
       polloi::subset_by_date_range(time_frame_range(input$tiles_style_series_timeframe, input$tiles_style_series_timeframe_daterange)) %>%
       polloi::make_dygraph("Date", "Tiles", "Total tiles by style", legend_name = "Style") %>%
@@ -60,7 +62,7 @@ shinyServer(function(input, output) {
   output$tiles_users_series <- renderDygraph({
     polloi::data_select(input$tile_users_automata_check, new_tiles_automata, new_tiles_no_automata) %>%
       ddply(.(date, style), summarize, `total users` = sum(users)) %>%
-      tidyr::spread(style, `total users`) %>%
+      tidyr::spread(style, `total users`, fill = 0) %>%
       polloi::smoother(smooth_level = polloi::smooth_switch(input$smoothing_global, input$smoothing_tiles_users_series)) %>%
       polloi::subset_by_date_range(time_frame_range(input$tiles_users_series_timeframe, input$tiles_users_series_timeframe_daterange)) %>%
       polloi::make_dygraph("Date", "Users", "Total users by style") %>%
@@ -80,7 +82,7 @@ shinyServer(function(input, output) {
     polloi::data_select(input$tile_zoom_automata_check, new_tiles_automata, new_tiles_no_automata) %>%
       subset(zoom %in% as.numeric(input$zoom_level_selector)) %>%
       ddply(.(date, zoom), summarize, `total tiles` = sum(total)) %>%
-      tidyr::spread(zoom, `total tiles`) %>%
+      tidyr::spread(zoom, `total tiles`, fill = 0) %>%
       polloi::smoother(smooth_level = polloi::smooth_switch(input$smoothing_global, input$smoothing_tiles_zoom_series)) %>%
       polloi::subset_by_date_range(time_frame_range(input$tiles_zoom_series_timeframe, input$tiles_zoom_series_timeframe_daterange)) %>%
       polloi::make_dygraph("Date", "Tiles", "Total tiles by zoom level") %>%
