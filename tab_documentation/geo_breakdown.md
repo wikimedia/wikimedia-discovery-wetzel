@@ -1,9 +1,7 @@
-Total tiles by style
+WIWOSM feature usage
 =======
 
-Currently there are two styles: OpenStreetMap ("osm") and OSM with labels ("osm-intl"). After the announcement, most of the tiles served are _osm-intl_.
-
-Data is displayed on a 30-day rolling window for performance reasons but the original data can be found in [here](http://datasets.wikimedia.org/aggregate-datasets/maps/)
+This tab contains a geographic breakdown of Maps traffic. The percentage of traffic from each of the top 9 countries is displayed: for privacy and display reasons, all others are grouped into "Other".
 
 Outages and inaccuracies
 ------
@@ -17,7 +15,7 @@ For technical, non-bug questions, [email Mikhail](mailto:mpopov@wikimedia.org?su
 <hr style="border-color: gray;">
 <p style="font-size: small; color: gray;">
   <strong>Link to this dashboard:</strong>
-  <a href="http://discovery.wmflabs.org/maps/#tiles_total_by_style">
-    http://discovery.wmflabs.org/maps/#tiles_total_by_style
+  <a href="http://discovery.wmflabs.org/maps/#geo_breakdown">
+    http://discovery.wmflabs.org/maps/#geo_breakdown
   </a>
 </p>

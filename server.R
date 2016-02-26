@@ -9,6 +9,7 @@ shinyServer(function(input, output, session) {
     read_actions()
     read_users()
     suppressWarnings(read_tiles())
+    read_countries()
     existing_date <<- Sys.Date()
   }
   
@@ -123,6 +124,12 @@ shinyServer(function(input, output, session) {
       polloi::smoother(smooth_level = polloi::smooth_switch(input$smoothing_global, input$smoothing_wiwosm_feature_usage)) %>%
       polloi::subset_by_date_range(time_frame_range(input$wiwosm_feature_usage_timeframe, input$wiwosm_feature_usage_timeframe_daterange)) %>%
       polloi::make_dygraph("Date", "Events", "Feature usage for WIWOSM")
+  })
+  
+  
+  output$users_by_country <- renderDygraph({
+    country_data %>%
+      polloi::make_dygraph("Date", "Users (%)", "Geographic breakdown of maps users")
   })
   
   # Check datasets for missing data and notify user which datasets are missing data (if any)

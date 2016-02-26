@@ -3,6 +3,8 @@ Total users by style
 
 Currently there are two styles: OpenStreetMap ("osm") and OSM with labels ("osm-intl"). After the announcement, most of the users use _osm-intl_.
 
+Data is displayed on a 30-day rolling window for performance reasons but the original data can be found in [here](http://datasets.wikimedia.org/aggregate-datasets/maps/)
+
 Outages and inaccuracies
 ------
 

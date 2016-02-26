@@ -22,6 +22,7 @@ sidebar <- dashboardSidebar(
              menuSubItem(text = "WikiMiniAtlas", tabName = "wikiminiatlas_usage"),
              menuSubItem(text = "Wikivoyage", tabName = "wikivoyage_usage"),
              menuSubItem(text = "WIWOSM", tabName = "wiwosm_usage")),
+    menuItem(text = "Geographic breakdown", tabName = "geo_breakdown"),
     menuItem(text = "Global Settings",
              selectInput(inputId = "smoothing_global", label = "Smoothing", selectize = TRUE, selected = "day",
                          choices = c("No Smoothing" = "day", "Weekly Median" = "week", "Monthly Median" = "month")),
@@ -114,7 +115,10 @@ body <- dashboardBody(
               column(polloi::timeframe_select("wiwosm_feature_usage_timeframe"), width = 4),
               column(polloi::timeframe_daterange("wiwosm_feature_usage_timeframe"), width = 4)),
             dygraphOutput("wiwosm_feature_usage"),
-            includeMarkdown("./tab_documentation/wiwosm_usage.md"))
+            includeMarkdown("./tab_documentation/wiwosm_usage.md")),
+    tabItem(tabName = "geo_breakdown",
+            dygraphOutput("users_by_country"),
+            includeMarkdown("./tab_documentation/geo_breakdown.md"))
   )
 )
 

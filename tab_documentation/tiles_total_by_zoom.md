@@ -3,6 +3,8 @@ Total tiles by zoom level
 
 **Note** that you can select multiple zoom levels. Windows and Linux users can select additional zoom levels by holding the Ctrl key when selecting, while Mac users have to use the Cmd key.
 
+Data is displayed on a 30-day rolling window for performance reasons but the original data can be found in [here](http://datasets.wikimedia.org/aggregate-datasets/maps/)
+
 Outages and inaccuracies
 ------
 

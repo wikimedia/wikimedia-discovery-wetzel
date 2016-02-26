@@ -30,8 +30,14 @@ read_users <- function() {
 }
 
 read_tiles <- function() {
-  new_tiles_automata <<- polloi::read_dataset("maps/tile_aggregates_with_automata.tsv", col_types = "Dcidcciidiii")
-  new_tiles_no_automata <<- polloi::read_dataset("maps/tile_aggregates_no_automata.tsv", col_types = "Dcidcciidiii")
+  new_tiles_automata <<- polloi::read_dataset("maps/tile_aggregates_with_automata_rolling.tsv", col_types = "Dcidcciidiii")
+  new_tiles_no_automata <<- polloi::read_dataset("maps/tile_aggregates_no_automata_rolling.tsv", col_types = "Dcidcciidiii")
                                                                         
   return(invisible())
+}
+
+read_countries <- function(){
+  interim <- polloi::read_dataset("maps/users_by_country.tsv")
+  interim$users <- interim$users*100
+  country_data <<- reshape2::dcast(interim, formula = date ~ country, fun.aggregate = sum)
 }
