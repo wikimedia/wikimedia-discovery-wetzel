@@ -37,7 +37,8 @@ sidebar <- dashboardSidebar(
              shinyURL.ui(tinyURL = FALSE),
              p("Dashboard settings stored in URL.", style = "padding-bottom: 10px;"),
              icon = icon("share-alt", lib = "glyphicon"))
-  )
+  ),
+  div(icon("info-sign", lib = "glyphicon"), HTML("<strong>Tip</strong>: you can drag on the graphs with your mouse to zoom in on a particular date range."), style = "padding: 10px; color: white;")
 )
 
 body <- dashboardBody(
