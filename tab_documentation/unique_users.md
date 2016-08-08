@@ -14,7 +14,7 @@ between each platform.
 Outages and inaccuracies
 ------
 
-* None so far!
+- **'A'** (2016-04-15): Something happened with Maps' EventLogging and our Analytics scripts. It is being investigated in [T141456](https://phabricator.wikimedia.org/T141456).
 
 Questions, bug reports, and feature suggestions
 ------

@@ -36,15 +36,10 @@ shinyServer(function(input, output, session) {
       dyAxis(name = 'y', drawGrid = FALSE) %>%
       dyAxis(name = 'y2', independentTicks = TRUE, drawGrid = FALSE) %>%
       dyLegend(labelsDiv = "tiles_summary_series_legend", show = "always") %>%
-      dyAnnotation(as.Date("2015-09-17"), text = "A",
-                   tooltip = "Maps launch announcement",
-                   width = 10, height = 20, attachAtBottom = FALSE, series = grep('total', names(temp), value = TRUE)) %>%
-      dyAnnotation(as.Date("2016-01-08"), text = "B",
-                   tooltip = "Maps launched on en.wikipedia.org",
-                   width = 10, height = 20, attachAtBottom = FALSE, series = grep('total', names(temp), value = TRUE)) %>%
-      dyAnnotation(as.Date("2016-01-12"), text = "C",
-                   tooltip = "Maps launch on en.wikipedia.org reverted on the 9th; caches begin to clear",
-                   width = 10, height = 20, attachAtBottom = FALSE, series = grep('total', names(temp), value = TRUE))
+      dyRangeSelector(retainDateWindow = TRUE) %>%
+      dyEvent(as.Date("2015-09-17"), "A (announcement)", labelLoc = "bottom") %>%
+      dyEvent(as.Date("2016-01-08"), "B (enwiki launch)", labelLoc = "bottom") %>%
+      dyEvent(as.Date("2016-01-12"), "C (cache clear)", labelLoc = "bottom")
   })
   
   output$tiles_style_series <- renderDygraph({
@@ -55,9 +50,8 @@ shinyServer(function(input, output, session) {
       polloi::subset_by_date_range(time_frame_range(input$tiles_style_series_timeframe, input$tiles_style_series_timeframe_daterange)) %>%
       polloi::make_dygraph("Date", "Tiles", "Total tiles by style", legend_name = "Style") %>%
       dyLegend(labelsDiv = "tiles_style_series_legend", show = "always") %>%
-      dyAnnotation(as.Date("2015-09-17"), text = "Announcement",
-                   tooltip = "Maps launch announcement",
-                   width = 100, height = 25, attachAtBottom = TRUE)
+      dyRangeSelector %>%
+      dyEvent(as.Date("2015-09-17"), "A (announcement)", labelLoc = "bottom")
   })
   
   output$tiles_users_series <- renderDygraph({
@@ -68,9 +62,8 @@ shinyServer(function(input, output, session) {
       polloi::subset_by_date_range(time_frame_range(input$tiles_users_series_timeframe, input$tiles_users_series_timeframe_daterange)) %>%
       polloi::make_dygraph("Date", "Users", "Total users by style") %>%
       dyLegend(labelsDiv = "tiles_users_series_legend", show = "always") %>%
-      dyAnnotation(as.Date("2015-09-17"), text = "Announcement",
-                   tooltip = "Maps launch announcement",
-                   width = 100, height = 25, attachAtBottom = TRUE)
+      dyRangeSelector %>%
+      dyEvent(as.Date("2015-09-17"), "A (announcement)", labelLoc = "bottom")
   })
   
   output$zoom_level_selector_container <- renderUI({
@@ -95,41 +88,55 @@ shinyServer(function(input, output, session) {
       polloi::smoother(smooth_level = polloi::smooth_switch(input$smoothing_global, input$smoothing_users_per_platform)) %>%
       polloi::subset_by_date_range(time_frame_range(input$users_per_platform_timeframe, input$users_per_platform_timeframe_daterange)) %>%
       polloi::make_dygraph("Date", "Events", "Unique users by platform, by day") %>%
-      dyLegend(labelsDiv = "users_per_platform_legend", show = "always")
+      dyLegend(labelsDiv = "users_per_platform_legend", show = "always") %>%
+      dyRangeSelector %>%
+      dyAxis("y", logscale = input$users_per_platform_logscale) %>%
+      dyEvent(as.Date("2016-04-15"), "A (Maps EL outage)", labelLoc = "bottom")
   })
   
   output$geohack_feature_usage <- renderDygraph({
     usage_data$GeoHack %>%
       polloi::smoother(smooth_level = polloi::smooth_switch(input$smoothing_global, input$smoothing_geohack_feature_usage)) %>%
       polloi::subset_by_date_range(time_frame_range(input$geohack_feature_usage_timeframe, input$geohack_feature_usage_timeframe_daterange)) %>%
-      polloi::make_dygraph("Date", "Events", "Feature usage for GeoHack")
+      polloi::make_dygraph("Date", "Events", "Feature usage for GeoHack") %>%
+      dyRangeSelector %>%
+      dyAxis("y", logscale = input$geohack_feature_usage_logscale)
   })
   
   output$wikiminiatlas_feature_usage <- renderDygraph({
     usage_data$WikiMiniAtlas %>%
       polloi::smoother(smooth_level = polloi::smooth_switch(input$smoothing_global, input$smoothing_wikiminiatlas_feature_usage)) %>%
       polloi::subset_by_date_range(time_frame_range(input$wikiminiatlas_feature_usage_timeframe, input$wikiminiatlas_feature_usage_timeframe_daterange)) %>%
-      polloi::make_dygraph("Date", "Events", "Feature usage for WikiMiniAtlas")
+      polloi::make_dygraph("Date", "Events", "Feature usage for WikiMiniAtlas") %>%
+      dyRangeSelector %>%
+      dyAxis("y", logscale = input$wikiminiatlas_feature_usage_logscale)
   })
   
   output$wikivoyage_feature_usage <- renderDygraph({
     usage_data$Wikivoyage %>%
       polloi::smoother(smooth_level = polloi::smooth_switch(input$smoothing_global, input$smoothing_wikivoyage_feature_usage)) %>%
       polloi::subset_by_date_range(time_frame_range(input$wikivoyage_feature_usage_timeframe, input$wikivoyage_feature_usage_timeframe_daterange)) %>%
-      polloi::make_dygraph("Date", "Events", "Feature usage for Wikivoyage")
+      polloi::make_dygraph("Date", "Events", "Feature usage for Wikivoyage") %>%
+      dyRangeSelector %>%
+      dyAxis("y", logscale = input$wikivoyage_feature_usage_logscale)
   })
   
   output$wiwosm_feature_usage <- renderDygraph({
     usage_data$WIWOSM %>%
       polloi::smoother(smooth_level = polloi::smooth_switch(input$smoothing_global, input$smoothing_wiwosm_feature_usage)) %>%
       polloi::subset_by_date_range(time_frame_range(input$wiwosm_feature_usage_timeframe, input$wiwosm_feature_usage_timeframe_daterange)) %>%
-      polloi::make_dygraph("Date", "Events", "Feature usage for WIWOSM")
+      polloi::make_dygraph("Date", "Events", "Feature usage for WIWOSM") %>%
+      dyRangeSelector %>%
+      dyAxis("y", logscale = input$wiwosm_feature_usage_logscale)
   })
   
   
   output$users_by_country <- renderDygraph({
     country_data %>%
-      polloi::make_dygraph("Date", "Users (%)", "Geographic breakdown of maps users")
+      polloi::smoother(smooth_level = polloi::smooth_switch(input$smoothing_global, input$smoothing_users_by_country)) %>%
+      polloi::subset_by_date_range(time_frame_range(input$users_by_country_timeframe, input$users_by_country_timeframe_daterange)) %>%
+      polloi::make_dygraph("Date", "Users (%)", "Geographic breakdown of maps users") %>%
+      dyRangeSelector(fillColor = "", strokeColor = "")
   })
   
   # Check datasets for missing data and notify user which datasets are missing data (if any)

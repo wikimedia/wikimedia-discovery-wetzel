@@ -6,8 +6,10 @@ The initial usage spike was due to the announcement of the mapping service to th
 Outages and inaccuracies
 ------
 
-* From 2015-11-01 to 2015-11-10 stress-testing traffic made its way into this data; this has now been removed.
-
+- From 2015-11-01 to 2015-11-10 stress-testing traffic made its way into this data; this has now been removed.
+- **'A'** (2015-09-17): Maps launch announced
+- **'B'** (2016-01-08): Maps launched on en.wikipedia.org
+- **'C'** (2016-01-12): Maps launch on en.wikipedia.org reverted on the 9th; caches begin to clear
 
 Questions, bug reports, and feature suggestions
 ------
