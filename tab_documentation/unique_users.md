@@ -14,7 +14,7 @@ between each platform.
 Outages and inaccuracies
 ------
 
-- **'A'** (2016-04-15): Something happened with Maps' EventLogging and our Analytics scripts. It is being investigated in [T141456](https://phabricator.wikimedia.org/T141456).
+- **'A'** (2016-04-15): There was a bug in Maps event logging wherein tracking did not work. It was patched on 17 June 2016. See [T138078](https://phabricator.wikimedia.org/T138078) for more details.
 
 Questions, bug reports, and feature suggestions
 ------

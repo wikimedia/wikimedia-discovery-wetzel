@@ -91,7 +91,8 @@ shinyServer(function(input, output, session) {
       dyLegend(labelsDiv = "users_per_platform_legend", show = "always") %>%
       dyRangeSelector %>%
       dyAxis("y", logscale = input$users_per_platform_logscale) %>%
-      dyEvent(as.Date("2016-04-15"), "A (Maps EL outage)", labelLoc = "bottom")
+      dyEvent(as.Date("2016-04-15"), "A (Maps EL bug)", labelLoc = "bottom") %>%
+      dyEvent(as.Date("2016-06-17"), "A (Maps EL patch)", labelLoc = "bottom")
   })
   
   output$geohack_feature_usage <- renderDygraph({
