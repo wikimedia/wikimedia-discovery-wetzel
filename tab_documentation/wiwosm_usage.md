@@ -13,7 +13,7 @@ Events are sampled at a rate of *1%*.
 Outages and inaccuracies
 ------
 
-* None so far!
+- **'A'** (2016-04-15): There was a bug in Maps event logging wherein tracking did not work. It was patched on 17 June 2016. See [T138078](https://phabricator.wikimedia.org/T138078) for more details.
 
 Questions, bug reports, and feature suggestions
 ------
