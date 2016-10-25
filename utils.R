@@ -6,7 +6,6 @@ library(tidyr)
 library(reshape2)
 library(polloi)
 library(data.table)
-library(shinyURL) # devtools::install_github("aoles/shinyURL")
 
 # Read in action data and write it into the global scope with sufficient formatting to be trivially
 # used in dygraphs.
@@ -30,9 +29,8 @@ read_users <- function() {
 }
 
 read_tiles <- function() {
-  new_tiles_automata <<- polloi::read_dataset("maps/tile_aggregates_with_automata_rolling.tsv", col_types = "Dcidcciidiii")
-  new_tiles_no_automata <<- polloi::read_dataset("maps/tile_aggregates_no_automata_rolling.tsv", col_types = "Dcidcciidiii")
-                                                                        
+  new_tiles_automata <<- as.data.table(polloi::read_dataset("maps/tile_aggregates_with_automata.tsv", col_types = "Dcidcciidiii"))
+  new_tiles_no_automata <<- as.data.table(polloi::read_dataset("maps/tile_aggregates_no_automata.tsv", col_types = "Dcidcciidiii"))
   return(invisible())
 }
 

@@ -38,10 +38,14 @@ function(request) {
       tabItems(
         tabItem(tabName = "tiles_summary",
                 fluidRow(
-                  column(selectInput("tiles_summary_variable", "Total", c("Users", "Tiles")), width = 2),
-                  column(polloi::smooth_select("smoothing_tiles_summary_series"), width = 3),
-                  column(polloi::timeframe_select("tiles_summary_series_timeframe"), width = 3),
-                  column(polloi::timeframe_daterange("tiles_summary_series_timeframe"), width = 4)),
+                  column(selectInput("tiles_summary_variable", "Total", c("Users", "Tiles"), selected = "Tiles"), width = 4),
+                  column(polloi::smooth_select("smoothing_tiles_summary_series"), width = 4),
+                  column(
+                    HTML("<label class = \"control-label\" style = \"margin-bottom:-30px;\">Scaling</label>"),
+                    checkboxInput("tiles_summary_logscale", "Use Log scale", FALSE),
+                    width = 4
+                  )
+                ),
                 polloi::automata_select("tile_summary_automata_check"),
                 dygraphOutput("tiles_summary_series"),
                 div(id = "tiles_summary_series_legend", style = "text-align: right;"),
@@ -49,8 +53,12 @@ function(request) {
         tabItem(tabName = "tiles_total_by_style",
                 fluidRow(
                   column(polloi::smooth_select("smoothing_tiles_style_series"), width = 4),
-                  column(polloi::timeframe_select("tiles_style_series_timeframe"), width = 4),
-                  column(polloi::timeframe_daterange("tiles_style_series_timeframe"), width = 4)),
+                  column(
+                    HTML("<label class = \"control-label\" style = \"margin-bottom:-30px;\">Scaling</label>"),
+                    checkboxInput("tiles_style_logscale", "Use Log scale", FALSE),
+                    width = 4
+                  )
+                ),
                 polloi::automata_select("tile_style_automata_check"),
                 dygraphOutput("tiles_style_series"),
                 div(id = "tiles_style_series_legend", style = "text-align: right;"),
@@ -58,8 +66,12 @@ function(request) {
         tabItem(tabName = "tiles_users_by_style",
                 fluidRow(
                   column(polloi::smooth_select("smoothing_tiles_users_series"), width = 4),
-                  column(polloi::timeframe_select("tiles_users_series_timeframe"), width = 4),
-                  column(polloi::timeframe_daterange("tiles_users_series_timeframe"), width = 4)),
+                  column(
+                    HTML("<label class = \"control-label\" style = \"margin-bottom:-30px;\">Scaling</label>"),
+                    checkboxInput("tiles_users_logscale", "Use Log scale", FALSE),
+                    width = 4
+                  )
+                ),
                 polloi::automata_select("tile_users_automata_check"),
                 dygraphOutput("tiles_users_series"),
                 div(id = "tiles_users_series_legend", style = "text-align: right;"),
@@ -67,8 +79,12 @@ function(request) {
         tabItem(tabName = "tiles_total_by_zoom",
                 fluidRow(
                   column(polloi::smooth_select("smoothing_tiles_zoom_series"), width = 4),
-                  column(polloi::timeframe_select("tiles_zoom_series_timeframe"), width = 4),
-                  column(polloi::timeframe_daterange("tiles_zoom_series_timeframe"), width = 4)),
+                  column(
+                    HTML("<label class = \"control-label\" style = \"margin-bottom:-30px;\">Scaling</label>"),
+                    checkboxInput("tiles_zoom_logscale", "Use Log scale", FALSE),
+                    width = 4
+                  )
+                ),
                 fluidRow(column(uiOutput("zoom_level_selector_container"), width = 3),
                          column(dygraphOutput("tiles_zoom_series"), width = 8)),
                 polloi::automata_select("tile_zoom_automata_check"),
@@ -77,49 +93,41 @@ function(request) {
         tabItem(tabName = "platform_usage",
                 fluidRow(
                   column(polloi::smooth_select("smoothing_users_per_platform"), width = 3),
-                  column(polloi::timeframe_select("users_per_platform_timeframe"), width = 3),
-                  column(polloi::timeframe_daterange("users_per_platform_timeframe"), width = 3),
-                  column(checkboxInput("users_per_platform_logscale", "Use Log scale", FALSE), width = 3)),
+                  column(checkboxInput("users_per_platform_logscale", "Use Log scale", FALSE), width = 3)
+                ),
                 dygraphOutput("users_per_platform"),
                 div(id = "users_per_platform_legend", style = "text-align: right;"),
                 includeMarkdown("./tab_documentation/unique_users.md")),
         tabItem(tabName = "geohack_usage",
                 fluidRow(
-                  column(polloi::smooth_select("smoothing_geohack_feature_usage"), width = 3),
-                  column(polloi::timeframe_select("geohack_feature_usage_timeframe"), width = 3),
-                  column(polloi::timeframe_daterange("geohack_feature_usage_timeframe"), width = 3),
-                  column(checkboxInput("geohack_feature_usage_logscale", "Use Log scale", FALSE), width = 3)),
+                  column(polloi::smooth_select("smoothing_geohack_feature_usage"), width = 4),
+                  column(checkboxInput("geohack_feature_usage_logscale", "Use Log scale", FALSE), width = 4)
+                ),
                 dygraphOutput("geohack_feature_usage"),
                 includeMarkdown("./tab_documentation/geohack_usage.md")),
         tabItem(tabName = "wikiminiatlas_usage",
                 fluidRow(
-                  column(polloi::smooth_select("smoothing_wikiminiatlas_feature_usage"), width = 3),
-                  column(polloi::timeframe_select("wikiminiatlas_feature_usage_timeframe"), width = 3),
-                  column(polloi::timeframe_daterange("wikiminiatlas_feature_usage_timeframe"), width = 3),
-                  column(checkboxInput("wikiminiatlas_feature_usage_logscale", "Use Log scale", FALSE), width = 3)),
+                  column(polloi::smooth_select("smoothing_wikiminiatlas_feature_usage"), width = 4),
+                  column(checkboxInput("wikiminiatlas_feature_usage_logscale", "Use Log scale", FALSE), width = 4)
+                ),
                 dygraphOutput("wikiminiatlas_feature_usage"),
                 includeMarkdown("./tab_documentation/wikiminiatlas_usage.md")),
         tabItem(tabName = "wikivoyage_usage",
                 fluidRow(
-                  column(polloi::smooth_select("smoothing_wikivoyage_feature_usage"), width = 3),
-                  column(polloi::timeframe_select("wikivoyage_feature_usage_timeframe"), width = 3),
-                  column(polloi::timeframe_daterange("wikivoyage_feature_usage_timeframe"), width = 3),
-                  column(checkboxInput("wikivoyage_feature_usage_logscale", "Use Log scale", FALSE), width = 3)),
+                  column(polloi::smooth_select("smoothing_wikivoyage_feature_usage"), width = 4),
+                  column(checkboxInput("wikivoyage_feature_usage_logscale", "Use Log scale", FALSE), width = 4)
+                ),
                 dygraphOutput("wikivoyage_feature_usage"),
                 includeMarkdown("./tab_documentation/wikivoyage_usage.md")),
         tabItem(tabName = "wiwosm_usage",
                 fluidRow(
-                  column(polloi::smooth_select("smoothing_wiwosm_feature_usage"), width = 3),
-                  column(polloi::timeframe_select("wiwosm_feature_usage_timeframe"), width = 3),
-                  column(polloi::timeframe_daterange("wiwosm_feature_usage_timeframe"), width = 3),
-                  column(checkboxInput("wiwosm_feature_usage_logscale", "Use Log scale", FALSE), width = 3)),
+                  column(polloi::smooth_select("smoothing_wiwosm_feature_usage"), width = 4),
+                  column(checkboxInput("wiwosm_feature_usage_logscale", "Use Log scale", FALSE), width = 4)
+                ),
                 dygraphOutput("wiwosm_feature_usage"),
                 includeMarkdown("./tab_documentation/wiwosm_usage.md")),
         tabItem(tabName = "geo_breakdown",
-                fluidRow(
-                  column(polloi::smooth_select("smoothing_users_by_country"), width = 4),
-                  column(polloi::timeframe_select("users_by_country_timeframe"), width = 4),
-                  column(polloi::timeframe_daterange("users_by_country_timeframe"), width = 4)),
+                polloi::smooth_select("smoothing_users_by_country"),
                 dygraphOutput("users_by_country"),
                 includeMarkdown("./tab_documentation/geo_breakdown.md"))
       )
