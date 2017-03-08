@@ -40,7 +40,8 @@ shinyServer(function(input, output, session) {
       dyEvent(as.Date("2015-09-17"), "A (announcement)", labelLoc = "bottom") %>%
       dyEvent(as.Date("2016-01-08"), "B (enwiki launch)", labelLoc = "bottom") %>%
       dyEvent(as.Date("2016-01-12"), "C (cache clear)", labelLoc = "bottom") %>%
-      dyEvent(as.Date("2016-11-09"), "D (pkget)", labelLoc = "bottom")
+      dyEvent(as.Date("2016-11-09"), "D (pkget)", labelLoc = "bottom") %>%
+      dyEvent(as.Date("2017-01-01"), "R (reportupdater)", labelLoc = "bottom")
   })
 
   output$tiles_style_series <- renderDygraph({
@@ -59,7 +60,8 @@ shinyServer(function(input, output, session) {
       dyEvent(as.Date("2015-09-17"), "A (announcement)", labelLoc = "bottom") %>%
       dyEvent(as.Date("2016-01-08"), "B (enwiki launch)", labelLoc = "bottom") %>%
       dyEvent(as.Date("2016-01-12"), "C (cache clear)", labelLoc = "bottom") %>%
-      dyEvent(as.Date("2016-11-09"), "D (pkget)", labelLoc = "top")
+      dyEvent(as.Date("2016-11-09"), "D (pkget)", labelLoc = "top") %>%
+      dyEvent(as.Date("2017-01-01"), "R (reportupdater)", labelLoc = "bottom")
   })
 
   output$tiles_users_series <- renderDygraph({
@@ -78,7 +80,8 @@ shinyServer(function(input, output, session) {
       dyEvent(as.Date("2015-09-17"), "A (announcement)", labelLoc = "bottom") %>%
       dyEvent(as.Date("2016-01-08"), "B (enwiki launch)", labelLoc = "bottom") %>%
       dyEvent(as.Date("2016-01-12"), "C (cache clear)", labelLoc = "bottom") %>%
-      dyEvent(as.Date("2016-11-08"), "D (pkget)", labelLoc = "top")
+      dyEvent(as.Date("2016-11-08"), "D (pkget)", labelLoc = "top") %>%
+      dyEvent(as.Date("2017-01-01"), "R (reportupdater)", labelLoc = "bottom")
   })
 
   output$zoom_level_selector_container <- renderUI({
@@ -99,7 +102,8 @@ shinyServer(function(input, output, session) {
       polloi::smoother(smooth_level = polloi::smooth_switch(input$smoothing_global, input$smoothing_tiles_zoom_series)) %>%
       polloi::make_dygraph("Date", "Tiles", "Total tiles by zoom level") %>%
       dyAxis("y", logscale = input$tiles_zoom_logscale) %>%
-      dyLegend(labelsDiv = "tiles_zoom_series_legend", show = "always")
+      dyLegend(labelsDiv = "tiles_zoom_series_legend", show = "always") %>%
+      dyEvent(as.Date("2017-01-01"), "R (reportupdater)", labelLoc = "bottom")
   })
 
   output$users_per_platform <- renderDygraph({
@@ -110,7 +114,8 @@ shinyServer(function(input, output, session) {
       dyLegend(labelsDiv = "users_per_platform_legend", show = "always") %>%
       dyRangeSelector %>%
       dyEvent(as.Date("2016-04-15"), "A (Maps EL bug)", labelLoc = "bottom") %>%
-      dyEvent(as.Date("2016-06-17"), "A (Maps EL patch)", labelLoc = "bottom")
+      dyEvent(as.Date("2016-06-17"), "A (Maps EL patch)", labelLoc = "bottom") %>%
+      dyEvent(as.Date("2017-01-01"), "R (reportupdater)", labelLoc = "bottom")
   })
 
   output$geohack_feature_usage <- renderDygraph({
@@ -120,7 +125,8 @@ shinyServer(function(input, output, session) {
       dyRangeSelector %>%
       dyAxis("y", logscale = input$geohack_feature_usage_logscale) %>%
       dyEvent(as.Date("2016-04-15"), "A (Maps EL bug)", labelLoc = "bottom") %>%
-      dyEvent(as.Date("2016-06-17"), "A (Maps EL patch)", labelLoc = "bottom")
+      dyEvent(as.Date("2016-06-17"), "A (Maps EL patch)", labelLoc = "bottom") %>%
+      dyEvent(as.Date("2017-01-01"), "R (reportupdater)", labelLoc = "bottom")
   })
 
   output$wikiminiatlas_feature_usage <- renderDygraph({
@@ -130,7 +136,8 @@ shinyServer(function(input, output, session) {
       dyRangeSelector %>%
       dyAxis("y", logscale = input$wikiminiatlas_feature_usage_logscale) %>%
       dyEvent(as.Date("2016-04-15"), "A (Maps EL bug)", labelLoc = "bottom") %>%
-      dyEvent(as.Date("2016-06-17"), "A (Maps EL patch)", labelLoc = "bottom")
+      dyEvent(as.Date("2016-06-17"), "A (Maps EL patch)", labelLoc = "bottom") %>%
+      dyEvent(as.Date("2017-01-01"), "R (reportupdater)", labelLoc = "bottom")
   })
 
   output$wikivoyage_feature_usage <- renderDygraph({
@@ -140,7 +147,8 @@ shinyServer(function(input, output, session) {
       dyRangeSelector %>%
       dyAxis("y", logscale = input$wikivoyage_feature_usage_logscale) %>%
       dyEvent(as.Date("2016-04-15"), "A (Maps EL bug)", labelLoc = "bottom") %>%
-      dyEvent(as.Date("2016-06-17"), "A (Maps EL patch)", labelLoc = "bottom")
+      dyEvent(as.Date("2016-06-17"), "A (Maps EL patch)", labelLoc = "bottom") %>%
+      dyEvent(as.Date("2017-01-01"), "R (reportupdater)", labelLoc = "bottom")
   })
 
   output$wiwosm_feature_usage <- renderDygraph({
@@ -150,7 +158,8 @@ shinyServer(function(input, output, session) {
       dyRangeSelector %>%
       dyAxis("y", logscale = input$wiwosm_feature_usage_logscale) %>%
       dyEvent(as.Date("2016-04-15"), "A (Maps EL bug)", labelLoc = "bottom") %>%
-      dyEvent(as.Date("2016-06-17"), "A (Maps EL patch)", labelLoc = "bottom")
+      dyEvent(as.Date("2016-06-17"), "A (Maps EL patch)", labelLoc = "bottom") %>%
+      dyEvent(as.Date("2017-01-01"), "R (reportupdater)", labelLoc = "bottom")
   })
 
 
@@ -158,7 +167,8 @@ shinyServer(function(input, output, session) {
     country_data %>%
       polloi::smoother(smooth_level = polloi::smooth_switch(input$smoothing_global, input$smoothing_users_by_country)) %>%
       polloi::make_dygraph("Date", "Users (%)", "Geographic breakdown of maps users") %>%
-      dyRangeSelector(fillColor = "", strokeColor = "")
+      dyRangeSelector(fillColor = "", strokeColor = "") %>%
+      dyEvent(as.Date("2017-01-01"), "R (reportupdater)", labelLoc = "bottom")
   })
 
   # Check datasets for missing data and notify user which datasets are missing data (if any)
