@@ -91,6 +91,7 @@ shinyServer(function(input, output, session) {
   })
 
   output$tiles_zoom_series <- renderDygraph({
+    req(input$zoom_level_selector)
     polloi::data_select(
       input$tile_zoom_automata_check,
       new_tiles_automata,
