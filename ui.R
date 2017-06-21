@@ -133,5 +133,5 @@ function(request) {
       )
     ),
 
-    skin = "green", title = "Maps Usage Dashboard | Discovery | Engineering | Wikimedia Foundation")
+    skin = "green", title = "Maps Usage Dashboard | Discovery | Audiences | Wikimedia Foundation")
 }
