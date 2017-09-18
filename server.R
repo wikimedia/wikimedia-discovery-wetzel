@@ -41,7 +41,8 @@ shinyServer(function(input, output, session) {
       dyEvent(as.Date("2016-01-08"), "B (enwiki launch)", labelLoc = "bottom") %>%
       dyEvent(as.Date("2016-01-12"), "C (cache clear)", labelLoc = "bottom") %>%
       dyEvent(as.Date("2016-11-09"), "D (pkget)", labelLoc = "bottom") %>%
-      dyEvent(as.Date("2017-01-01"), "R (reportupdater)", labelLoc = "bottom")
+      dyEvent(as.Date("2017-01-01"), "R (reportupdater)", labelLoc = "bottom") %>%
+      dyEvent(as.Date("2017-08-14"), "E (pkget)", labelLoc = "bottom")
   })
 
   output$tiles_style_series <- renderDygraph({
@@ -61,7 +62,8 @@ shinyServer(function(input, output, session) {
       dyEvent(as.Date("2016-01-08"), "B (enwiki launch)", labelLoc = "bottom") %>%
       dyEvent(as.Date("2016-01-12"), "C (cache clear)", labelLoc = "bottom") %>%
       dyEvent(as.Date("2016-11-09"), "D (pkget)", labelLoc = "top") %>%
-      dyEvent(as.Date("2017-01-01"), "R (reportupdater)", labelLoc = "bottom")
+      dyEvent(as.Date("2017-01-01"), "R (reportupdater)", labelLoc = "bottom") %>%
+      dyEvent(as.Date("2017-08-14"), "E (pkget)", labelLoc = "bottom")
   })
 
   output$tiles_users_series <- renderDygraph({
@@ -81,7 +83,8 @@ shinyServer(function(input, output, session) {
       dyEvent(as.Date("2016-01-08"), "B (enwiki launch)", labelLoc = "bottom") %>%
       dyEvent(as.Date("2016-01-12"), "C (cache clear)", labelLoc = "bottom") %>%
       dyEvent(as.Date("2016-11-08"), "D (pkget)", labelLoc = "top") %>%
-      dyEvent(as.Date("2017-01-01"), "R (reportupdater)", labelLoc = "bottom")
+      dyEvent(as.Date("2017-01-01"), "R (reportupdater)", labelLoc = "bottom") %>%
+      dyEvent(as.Date("2017-08-14"), "E (pkget)", labelLoc = "bottom")
   })
 
   output$zoom_level_selector_container <- renderUI({

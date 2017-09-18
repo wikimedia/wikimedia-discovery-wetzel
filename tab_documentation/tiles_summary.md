@@ -6,12 +6,13 @@ The initial usage spike was due to the announcement of the mapping service to th
 Notes
 -----
 
-- From 2015-11-01 to 2015-11-10 stress-testing traffic made its way into this data; this has now been removed.
+* From 2015-11-01 to 2015-11-10 stress-testing traffic made its way into this data; this has now been removed.
 * '__A__' (2015-09-17): Maps launch announced
 * '__B__' (2016-01-08): Maps launched on en.wikipedia.org
 * '__C__' (2016-01-12): Maps launch on en.wikipedia.org reverted on the 9th; caches begin to clear
 * '__D__' (2016-11-09): Pokemon Go fan site Pkget switched to using our tiles after getting [blocked from tile.osm.org](https://github.com/openstreetmap/chef/commit/dece06b6) on 2016-11-08 (see [T154717](https://phabricator.wikimedia.org/T154717) for more details)
 * '__R__': on 2017-01-01 we started calculating all of Discovery's metrics using a new version of [our data retrieval and processing codebase](https://phabricator.wikimedia.org/diffusion/WDGO/) that we migrated to [Wikimedia Analytics](https://www.mediawiki.org/wiki/Analytics)' [Reportupdater infrastructure](https://wikitech.wikimedia.org/wiki/Analytics/Reportupdater). See [T150915](https://phabricator.wikimedia.org/T150915) for more details.
+* '__E__': on 2017-08-14, Pokemon Go fan site Pkget was shut down.
 
 Questions, bug reports, and feature suggestions
 ------
