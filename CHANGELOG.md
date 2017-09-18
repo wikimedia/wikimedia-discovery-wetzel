@@ -1,6 +1,10 @@
 # Change Log (Patch Notes)
 All notable changes to this project will be documented in this file.
 
+## 2017/09/18
+- Modularized the dashboard source code
+- Added maplink & mapframe prevalence graphs ([T170022](https://phabricator.wikimedia.org/T170022))
+
 ## 2017/06/20
 - Added licensing info ([T167930](https://phabricator.wikimedia.org/T167930))
 

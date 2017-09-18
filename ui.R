@@ -13,11 +13,14 @@ function(request) {
         tags$script(src = "custom.js")
       ),
       sidebarMenu(id = "tabs",
-                  menuItem(text = "Tiles",
+                  menuItem(text = "Kartotherian usage",
                            menuSubItem(text = "Summary", tabName = "tiles_summary"),
                            menuSubItem(text = "Tiles by style", tabName = "tiles_total_by_style"),
                            menuSubItem(text = "Users by style", tabName = "tiles_users_by_style"),
                            menuSubItem(text = "Tiles by zoom level", tabName = "tiles_total_by_zoom")),
+                  menuItem(text = "Kartographer usage",
+                           menuSubItem(text = "Overall prevalence", tabName = "kartographer_prevalence"),
+                           menuSubItem(text = "Language/project breakdown", tabName = "kartographer_langproj")),
                   menuItem(text = "Platform usage", tabName = "platform_usage"),
                   menuItem(text = "Feature usage",
                            menuSubItem(text = "GeoHack", tabName = "geohack_usage"),
@@ -85,11 +88,53 @@ function(request) {
                     width = 4
                   )
                 ),
-                fluidRow(column(uiOutput("zoom_level_selector_container"), width = 3),
-                         column(dygraphOutput("tiles_zoom_series"), width = 8)),
+                fluidRow(
+                  column(uiOutput("zoom_level_selector_container"), width = 3),
+                  column(dygraphOutput("tiles_zoom_series"), width = 8)
+                ),
                 polloi::automata_select("tile_zoom_automata_check"),
                 div(id = "tiles_zoom_series_legend", style = "text-align: right;"),
                 includeMarkdown("./tab_documentation/tiles_total_by_zoom.md")),
+        tabItem(tabName = "kartographer_prevalence",
+                dygraphOutput("overall_prevalence_series"),
+                div(id = "overall_prevalence_series_legend", style = "text-align: right;"),
+                includeMarkdown("./tab_documentation/overall_prevalence.md")),
+        tabItem(tabName = "kartographer_langproj",
+                fluidRow(
+                  column(polloi::smooth_select("smoothing_prevalence_langproj"), width = 4),
+                  column(checkboxGroupInput(
+                    "prevalence_langproj_feature", "Feature",
+                    c("Mapframe", "Maplink"), inline = TRUE,
+                    selected = c("Mapframe", "Maplink")
+                  ), width = 4),
+                  column(radioButtons(
+                    "prevalence_langproj_aggregation", "Aggregation",
+                    c("Overall", "Average", "Median"), inline = TRUE,
+                    selected = "Average"
+                  ), width = 4)
+                ),
+                fluidRow(
+                  column(
+                    selectInput("project_order", "Sort projects by",
+                                list("Alphabetical order" = "alphabet", "Volume of articles" = "volume"),
+                                selected = "volume"),
+                    uiOutput("project_selector_container"),
+                    width = 2
+                  ),
+                  column(
+                    selectInput("language_order", "Sort languages by",
+                                list("Alphabetical order" = "alphabet", "Volume of articles" = "volume"),
+                                selected = "volume"),
+                    uiOutput("language_selector_container"),
+                    width = 2
+                  ),
+                  column(
+                    dygraphOutput("prevalence_langproj_plot"),
+                    div(id = "prevalence_langproj_legend", style = "text-align: right;"),
+                    width = 8
+                  )
+                ),
+                includeMarkdown("./tab_documentation/prevalence_langproj.md")),
         tabItem(tabName = "platform_usage",
                 fluidRow(
                   column(polloi::smooth_select("smoothing_users_per_platform"), width = 3),

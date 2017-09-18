@@ -1,7 +1,7 @@
-Tiles (Summary)
+Kartotherian tile requests
 =======
 
-The initial usage spike was due to the announcement of the mapping service to the development community, and not the regular usage by Wikipedia users. Once the initial interest subsided, the usage fell back to the expected pre-announcement levels.
+The initial usage spike was due to the announcement of the mapping service to the development community, and not the regular usage by Wikipedia users. Once the initial interest subsided, the usage fell back to the expected pre-announcement levels until a Pokemon Go fan site "Pkget" switched to using Wikimedia Maps tiles after being blocked by OpenStreetMap.
 
 Notes
 -----
